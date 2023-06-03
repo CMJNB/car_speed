@@ -53,6 +53,9 @@ def trackMultipleObjects(videopath=VIDEOPATH, videoname=VIDEONAME):
     # 写入文本
     out = cv2.VideoWriter('outpy.avi', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 10, (WIDTH, HEIGHT))
 
+    # 初始化视频写入器
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    writer = cv2.VideoWriter(outVideName, fourcc, video_fps, (WIDTH, video_height), True)
 
     while True:
         # 读取视频帧
@@ -171,13 +174,14 @@ def trackMultipleObjects(videopath=VIDEOPATH, videoname=VIDEONAME):
                         cv2.putText(resultImage, str(int(speed[i])) + " km/h", (int(x1 + w1 / 2), int(y1 - 5)),
                                     cv2.FONT_HERSHEY_SIMPLEX, 0.75, (255, 255, 255), 2)
 
-        cv2.imshow('result', resultImage)
-
+        # cv2.imshow('result', resultImage)
+        # 保存视频
+        writer.write(resultImage)
 
         if cv2.waitKey(33) == 27:
             break
 
     cv2.destroyAllWindows()
 
-if __name__ == '__main__':
-    trackMultipleObjects()
+# if __name__ == '__main__':
+#     trackMultipleObjects()
