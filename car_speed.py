@@ -1,3 +1,4 @@
+import os
 import cv2
 import dlib
 import time
@@ -8,7 +9,7 @@ import math
 # 加载车辆识别的分类器
 carCascade = cv2.CascadeClassifier('myhaar.xml')
 
-VIDEOPATH = "video\\"
+VIDEOPATH = "video/"
 VIDEONAME = "cars.mp4"
 WIDTH = 1280
 HEIGHT = 720
@@ -29,7 +30,10 @@ def estimateSpeed(location1, location2):
 
 def trackMultipleObjects(videopath=VIDEOPATH, videoname=VIDEONAME):
     print(rf"{videopath}{videoname}")
-    outVideName = videoname.split('.')[0] + '_out.mp4'
+    out_path = f'{videopath}out/'
+    if not os.path.exists(out_path):
+        os.mkdir(out_path)
+    outVideName = out_path + videoname.split('.')[0] + '_out.mp4'
     # 读取视频文件
     video = cv2.VideoCapture(rf"{videopath}{videoname}")
     # 获取视频的帧速率
