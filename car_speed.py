@@ -8,9 +8,8 @@ import math
 # 加载车辆识别的分类器
 carCascade = cv2.CascadeClassifier('myhaar.xml')
 
-# 读取视频文件
-video = cv2.VideoCapture('video//cars.mp4')
-
+VIDEOPATH = "video\\"
+VIDEONAME = "cars.mp4"
 WIDTH = 1280
 HEIGHT = 720
 carWidht = 1.85
@@ -28,7 +27,18 @@ def estimateSpeed(location1, location2):
     return speed
 
 
-def trackMultipleObjects():
+def trackMultipleObjects(videopath=VIDEOPATH, videoname=VIDEONAME):
+    print(rf"{videopath}{videoname}")
+    outVideName = videoname.split('.')[0] + '_out.mp4'
+    # 读取视频文件
+    video = cv2.VideoCapture(rf"{videopath}{videoname}")
+    # 获取视频的帧速率
+    video_fps = video.get(cv2.CAP_PROP_FPS)
+    # 获取视频的高度
+    video_height = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    # 获取视频的宽度
+    video_width = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
+    print(outVideName, video_fps, video_height, video_width)
     rectangleColor = (0, 0, 225)
     frameCounter = 0
     currentCarID = 0
