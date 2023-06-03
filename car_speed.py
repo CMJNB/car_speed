@@ -182,6 +182,10 @@ def trackMultipleObjects(videopath=VIDEOPATH, videoname=VIDEONAME):
             break
 
     cv2.destroyAllWindows()
+    # 释放
+    writer.release()
+    # 返回视频地址
+    return outVideName
 
 # if __name__ == '__main__':
 #     trackMultipleObjects()
