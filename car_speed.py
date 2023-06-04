@@ -59,7 +59,7 @@ def trackMultipleObjects(videopath=VIDEOPATH, videoname=VIDEONAME):
 
     # 初始化视频写入器
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-    writer = cv2.VideoWriter(outVideName, fourcc, video_fps, (WIDTH, video_height), True)
+    writer = cv2.VideoWriter(outVideName, fourcc, video_fps, (WIDTH, HEIGHT), True)
 
     while True:
         # 读取视频帧
